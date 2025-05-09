@@ -44,7 +44,7 @@
 <body>
 
 <h1>Отправка сообщения 🚀</h1>
-<input type="text" id="messageInput" placeholder="Введите сообщение... 3">
+<input type="text" id="messageInput" placeholder="Введите сообщение... 4">
 <button onclick="sendMessage()">Отправить</button>
 
 <script>
@@ -52,8 +52,14 @@
         const message = document.getElementById('messageInput').value;
 
         if (!message) {
-            alert("Пожалуйста, введите сообщение! 3");
+            alert("Пожалуйста, введите сообщение! ");
             return;
+        }
+
+        if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) {
+            console.log("WebApp инициализирован");
+        } else {
+            console.log("WebApp не инициализирован");
         }
 
         // Проверяем, инициализирован ли WebApp
