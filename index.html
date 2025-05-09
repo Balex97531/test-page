@@ -5,22 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Send Message to Telegram</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <script>
-        window.addEventListener('load', function() {
-            Telegram.WebApp.init();
-            // Проверяем, инициализирован ли WebApp и доступны ли данные
-            if (Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
-                // Данные пользователя доступны
-                logToPage("✅ загружается страница");
-                logToPage(`User ID: ${Telegram.WebApp.initDataUnsafe.user.id}`); // Telegram ID пользователя
-                logToPage(`User Name: ${Telegram.WebApp.initDataUnsafe.user.first_name} ${Telegram.WebApp.initDataUnsafe.user.last_name}`); // Имя и фамилия пользователя
-                logToPage(`User Username: ${Telegram.WebApp.initDataUnsafe.user.username}`); // Никнейм пользователя
-            } else {
-                // Если данные пользователя недоступны
-                logToPage("❌ Данные пользователя не найдены.");
-            }
-        });
-    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -89,7 +73,10 @@
         }
 
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) {
-           // logToPage("✅ WebApp инициализирован!");
+            logToPage("✅ WebApp инициализирован!");
+            logToPage(`User ID: ${Telegram.WebApp.initDataUnsafe.user.id}`); // Telegram ID пользователя
+            logToPage(`User Username: ${Telegram.WebApp.initDataUnsafe.user.username}`); // Никнейм пользователя
+
         } else {
             alert("❌ WebApp не инициализирован");
             return;
