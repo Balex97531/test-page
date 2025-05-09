@@ -3,10 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+    <title>Send Message to Telegram</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f5f5f5;
+        }
+        input {
+            width: 300px;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-<h1>Привет, мир!</h1>
-<p>Эта страница доступна для встраивания в iframe 🚀</p>
+
+<h1>Отправка сообщения 🚀</h1>
+<input type="text" id="messageInput" placeholder="Введите сообщение...">
+<button onclick="sendMessage()">Отправить</button>
+
+<script>
+    function sendMessage() {
+        const message = document.getElementById('messageInput').value;
+
+        if (!message) {
+            alert("Пожалуйста, введите сообщение!");
+            return;
+        }
+
+        // Проверяем, инициализирован ли WebApp
+        if (window.Telegram.WebApp.initData) {
+            window.Telegram.WebApp.sendData(message); // Отправка данных в Telegram
+            alert("Сообщение отправлено!");
+        } else {
+            alert("WebApp не подключён!");
+        }
+    }
+</script>
+
 </body>
 </html>
