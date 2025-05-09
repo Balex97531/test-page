@@ -11,7 +11,7 @@
             // Проверяем, инициализирован ли WebApp и доступны ли данные
             if (Telegram.WebApp.initDataUnsafe && Telegram.WebApp.initDataUnsafe.user) {
                 // Данные пользователя доступны
-                logToPage("✅ WebApp инициализирован");
+                logToPage("✅ загружается страница");
                 logToPage(`User ID: ${Telegram.WebApp.initDataUnsafe.user.id}`); // Telegram ID пользователя
                 logToPage(`User Name: ${Telegram.WebApp.initDataUnsafe.user.first_name} ${Telegram.WebApp.initDataUnsafe.user.last_name}`); // Имя и фамилия пользователя
                 logToPage(`User Username: ${Telegram.WebApp.initDataUnsafe.user.username}`); // Никнейм пользователя
@@ -89,19 +89,13 @@
         }
 
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) {
-            logToPage("✅ WebApp инициализирован");
+           // logToPage("✅ WebApp инициализирован!");
         } else {
-            logToPage("❌ WebApp не инициализирован");
+            alert("❌ WebApp не инициализирован");
             return;
         }
-    // Проверяем, инициализирован ли WebApp
-        if (window.Telegram.WebApp.initData) {
-            logToPage(`📤 Отправка данных в Telegram: "${message}"`);
-            window.Telegram.WebApp.sendData(message); // Отправка данных в Telegram
-            alert("Сообщение отправлено!");
-        } else {
-            alert("WebApp не подключён!");
-        }
+        logToPage(`📤 Отправка данных в Telegram: "${message}"`);
+        window.Telegram.WebApp.sendData(message); // Отправка данных в Telegram
     }
 </script>
 
