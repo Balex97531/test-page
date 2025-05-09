@@ -46,7 +46,17 @@
 <h1>Отправка сообщения 🚀</h1>
 <input type="text" id="messageInput" placeholder="Введите сообщение... 4">
 <button onclick="sendMessage()">Отправить</button>
+<div id="logOutput"></div>
 
+<script>
+    function logToPage(message) {
+        const logElement = document.getElementById("logOutput");
+        logElement.innerHTML += `<p>${message}</p>`;
+    }
+
+    // Пример использования
+    logToPage("WebApp загружен успешно");
+</script>
 <script>
     function sendMessage() {
         const message = document.getElementById('messageInput').value;
