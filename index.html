@@ -9,6 +9,11 @@
         window.addEventListener('load', function() {
             Telegram.WebApp.init();
             logToPage("✅ WebApp инициализирован");
+            // Получаем данные о пользователе
+            const user = Telegram.WebApp.initDataUnsafe.user;
+            logToPage('User ID:', user.id); // Telegram ID пользователя
+            logToPage('User Name:', user.first_name, user.last_name); // Имя пользователя
+            logToPage('User Username:', user.username); // Никнейм пользователя
         });
     </script>
     <style>
@@ -84,13 +89,7 @@
             logToPage("❌ WebApp не инициализирован");
             return;
         }
-
-        const user = Telegram.WebApp.initDataUnsafe.user;
-        logToPage('User ID:', user.id); // Telegram ID пользователя
-        logToPage('User Name:', user.first_name, user.last_name); // Имя пользователя
-        logToPage('User Username:', user.username); // Никнейм пользователя
-
-        // Проверяем, инициализирован ли WebApp
+    // Проверяем, инициализирован ли WebApp
         if (window.Telegram.WebApp.initData) {
             logToPage(`📤 Отправка данных в Telegram: "${message}"`);
             window.Telegram.WebApp.sendData(message); // Отправка данных в Telegram
