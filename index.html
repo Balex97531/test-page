@@ -8,6 +8,7 @@
     <script>
         window.addEventListener('load', function() {
             Telegram.WebApp.init();
+            logToPage("✅ WebApp инициализирован");
         });
     </script>
     <style>
@@ -39,41 +40,54 @@
         button:hover {
             background-color: #45a049;
         }
+        #logOutput {
+            margin-top: 20px;
+            width: 400px;
+            height: 200px;
+            overflow-y: auto;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
     </style>
 </head>
 <body>
 
 <h1>Отправка сообщения 🚀</h1>
-<input type="text" id="messageInput" placeholder="Введите сообщение... 4">
+<input type="text" id="messageInput" placeholder="Введите сообщение...">
 <button onclick="sendMessage()">Отправить</button>
-<div id="logOutput"></div>
+
+<div id="logOutput">
+    <p>Журнал логов:</p>
+</div>
 
 <script>
     function logToPage(message) {
         const logElement = document.getElementById("logOutput");
-        logElement.innerHTML += `<p>${message}</p>`;
+        const timestamp = new Date().toLocaleTimeString();
+        logElement.innerHTML += `<p>[${timestamp}] ${message}</p>`;
     }
-
-    // Пример использования
-    logToPage("WebApp загружен успешно");
 </script>
+
 <script>
     function sendMessage() {
         const message = document.getElementById('messageInput').value;
 
         if (!message) {
-            alert("Пожалуйста, введите сообщение! ");
+            alert("Пожалуйста, введите сообщение!");
             return;
         }
 
         if (window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.initData) {
-            console.log("WebApp инициализирован");
+            logToPage("✅ WebApp инициализирован");
         } else {
-            console.log("WebApp не инициализирован");
+            logToPage("❌ WebApp не инициализирован");
+            return;
         }
 
         // Проверяем, инициализирован ли WebApp
         if (window.Telegram.WebApp.initData) {
+            logToPage(`📤 Отправка данных в Telegram: "${message}"`);
             window.Telegram.WebApp.sendData(message); // Отправка данных в Telegram
             alert("Сообщение отправлено!");
         } else {
